@@ -2,7 +2,7 @@ import DiscoverBlock from './DiscoverBlock/components/DiscoverBlock';
 import '../styles/_discover.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getNewReleases } from '../redux/reducer';
+import { getCategories, getNewReleases, getPlaylists } from '../redux/reducer';
 
 export default function Discover() {
   const dispatch = useDispatch();
@@ -15,6 +15,8 @@ export default function Discover() {
     // when authToken available fetch data
     if (authDetails?.access_token) {
       dispatch(getNewReleases());
+      dispatch(getPlaylists());
+      dispatch(getCategories());
     }
   }, [authDetails, dispatch]);
 

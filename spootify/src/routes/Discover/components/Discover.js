@@ -9,7 +9,14 @@ export default function Discover() {
   const authState = useSelector((state) => state.auth);
   const discoverState = useSelector((state) => state.discover);
   const { authDetails } = authState;
-  const { newReleases, playlists, categories } = discoverState;
+  const {
+    newReleases,
+    playlists,
+    categories,
+    newReleaseLoading,
+    playlistLoading,
+    categoriesLoading,
+  } = discoverState;
 
   useEffect(() => {
     // when authToken available fetch data
@@ -26,13 +33,20 @@ export default function Discover() {
         text='RELEASED THIS WEEK'
         id='released'
         data={newReleases}
+        isLoading={newReleaseLoading}
       />
-      <DiscoverBlock text='FEATURED PLAYLISTS' id='featured' data={playlists} />
+      <DiscoverBlock
+        text='FEATURED PLAYLISTS'
+        id='featured'
+        data={playlists}
+        isLoading={playlistLoading}
+      />
       <DiscoverBlock
         text='BROWSE'
         id='browse'
         data={categories}
         imagesKey='icons'
+        isLoading={categoriesLoading}
       />
     </div>
   );

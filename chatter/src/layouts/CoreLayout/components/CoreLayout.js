@@ -8,13 +8,13 @@ import '../styles/_core-layout.scss';
 
 export default function CoreLayout() {
   return (
-    <div className="core">
+    <div className='core'>
       <IconBackground />
       <LatestMessages>
         <UserList />
         <Messages />
         <ContactPanel />
-     </LatestMessages>
+      </LatestMessages>
     </div>
   );
 }

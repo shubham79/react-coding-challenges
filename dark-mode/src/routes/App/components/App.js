@@ -18,7 +18,10 @@ function App() {
           className={'app__dark-mode-btn icon level-right'}
           onClick={() => setIsDarkTheme((val) => !val)}
         >
-          <FontAwesomeIcon icon={isDarkTheme ? faSun : faMoon} />
+          <FontAwesomeIcon
+            icon={isDarkTheme ? faSun : faMoon}
+            color={isDarkTheme && '#FFA500'}
+          />
         </button>
       </div>
 

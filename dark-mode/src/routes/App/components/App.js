@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 
@@ -6,6 +6,18 @@ import '../styles/_app.scss';
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  // Hook to check system preference color scheme and set it by default
+  useEffect(() => {
+    const prefersDarkTheme = window.matchMedia(
+      '(prefers-color-scheme: dark)'
+    ).matches;
+
+    if (prefersDarkTheme) {
+      setIsDarkTheme(true);
+    }
+  }, []);
+
   return (
     <div className={`app ${isDarkTheme && `dark-mode`}`}>
       <div className='level'>

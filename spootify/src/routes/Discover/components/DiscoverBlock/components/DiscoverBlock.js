@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import DiscoverItem from './DiscoverItem';
 import '../styles/_discover-block.scss';
-import { Audio } from 'react-loader-spinner';
+import Loader from '../../../../../common/components/Loader/Loader';
 
 function scrollContainer(id, { isNegative } = {}) {
   return () => {
@@ -45,17 +45,7 @@ export default function DiscoverBlock({
         ) : null}
       </div>
       <div className='discover-block__row' id={id}>
-        {isLoading && (
-          <Audio
-            height='60'
-            width='60'
-            radius='7'
-            color='#564FD8'
-            ariaLabel='loading-spinner'
-            wrapperStyle
-            wrapperClass={'discover-block__loading'}
-          />
-        )}
+        {isLoading && <Loader wrapperClassNm={'discover-block__loading'} />}
         {data.map(({ [imagesKey]: images, name }) => (
           <DiscoverItem key={name} images={images} name={name} />
         ))}

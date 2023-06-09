@@ -1,6 +1,12 @@
 .dark-mode {
   background: #121212;
 
+  .app{
+    &__dark-mode-btn{
+      color: $pink;
+    }
+  }
+
   p {
     color: white;
     opacity: 87%;

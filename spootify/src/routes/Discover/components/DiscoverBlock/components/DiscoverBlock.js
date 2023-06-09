@@ -50,7 +50,7 @@ export default function DiscoverBlock({
             height='60'
             width='60'
             radius='7'
-            color='green'
+            color='#564FD8'
             ariaLabel='loading-spinner'
             wrapperStyle
             wrapperClass={'discover-block__loading'}

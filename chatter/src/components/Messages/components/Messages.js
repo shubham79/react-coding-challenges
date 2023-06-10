@@ -15,6 +15,7 @@ import Footer from './Footer';
 import Message from './Message';
 import '../styles/_messages.scss';
 import defaultMessages from '../../../contexts/LatestMessages/constants/initialMessages';
+import useScrollToBottom from '../../../customHooks/scrollToBottom';
 
 const socket = io(config.BOT_SERVER_ENDPOINT, {
   transports: ['websocket', 'polling', 'flashsocket'],
@@ -32,14 +33,7 @@ function Messages() {
   const [isBotTyping, setIsBotTyping] = useState(false);
 
   // Scroll to bottom hook for new message received / send
-  useEffect(() => {
-    if (messageElementRef) {
-      messageElementRef.current.addEventListener('DOMNodeInserted', (event) => {
-        const { currentTarget: target } = event;
-        target.scroll({ top: target.scrollHeight, behavior: 'smooth' });
-      });
-    }
-  }, []);
+  useScrollToBottom(messageElementRef);
 
   const handleBotMessageReceived = useCallback(
     (botMessage) => {
@@ -54,6 +48,7 @@ function Messages() {
     [playReceive, setLatestMessage]
   );
 
+  // side-effect ro handle on bot-message
   useEffect(() => {
     socket.on('bot-message', (message) => {
       // handle Bot Message
@@ -62,6 +57,7 @@ function Messages() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // side-effect ro handle on bot-typing
   useEffect(() => {
     socket.on('bot-typing', (message) => {
       // handle bot typing
@@ -69,6 +65,7 @@ function Messages() {
     });
   }, []);
 
+  // send message to Botty
   const sendMessage = useCallback(() => {
     if (userMessage && userMessage.length > 0) {
       playSend();
@@ -80,6 +77,7 @@ function Messages() {
     }
   }, [playSend, userMessage]);
 
+  // set User message to local state
   const onChangeMessage = useCallback((event) => {
     const inputValue = event.target.value;
     setUserMessage(inputValue);
